@@ -45,7 +45,7 @@ exports.search = (queries, resolve, reject) => {
       .then(function(data) {
         let tracks = []
         data.body.tracks.items.forEach((entry) => {
-          tracks.push(entry.id)
+          tracks.push(entry.name + ", by " + entry.artists[0].name)
         });
         query_resolve(tracks);
       }, function(err) {

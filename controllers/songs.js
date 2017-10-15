@@ -6,19 +6,25 @@ const spotify = require('../spotify')
 const router = express.Router();
 
 router.post('/', (req, res) => {
+  var retval={}
 
   new Promise((resolve, reject) => {
     clarifai.get_all_tags(req.body.gif_urls, resolve, reject)
   }).then((all_tags) => {
     console.log(all_tags);
+    retval["keywords"] = all_tags;
     new Promise((resolve, reject) => {
       spotify.search(all_tags, resolve, reject);
     }).then((tracks) => {
       console.log(tracks);
-      spotify.createPlaylist(tracks);
+      retval["tracks"] = tracks;
+      console.log(retval)
+      res.json(retval);
+      //spotify.createPlaylist(tracks);
     });
   });
-  res.json({status: 200});
+
+
 });
 
 
