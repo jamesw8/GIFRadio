@@ -9,21 +9,25 @@ const NaturalLanguageUnderstandingService = new NaturalLanguageUnderstandingV1({
 	"version_date": "2017-02-27"
 });
 
-let parameters = {
-	'text': 'This is a test text that tells us good news and bad news about something and yeah.',
-	'features': {
-		'emotion': {
-			'targets': [
-			'good',
-			'yeah'
-			]
+let retrieveEmotions = function (string, resolve, reject) {
+	let parameters = {
+		'text': string,
+		'features': {
+			'emotion': {
+				'targets': string.split(" ")
+			}
 		}
-	}
+	};
+
+	NaturalLanguageUnderstandingService.analyze(parameters, function(err, res) {
+		if (err)
+			console.log(err);
+		else
+			resolve(res);
+	});
 };
 
-NaturalLanguageUnderstandingService.analyze(parameters, function(err, res) {
-	if (err)
-		console.log(err);
-	else
-		console.log(JSON.stringify(res, null, 2));
-});
+// console.log(retrieveEmotions('hey what is up how are you really today?', resolve, reject));
+module.exports = {
+	retrieveEmotions: retrieveEmotions
+};
