@@ -22,10 +22,34 @@ get_tags = (gif_url, resolve, reject) => {
    });
  }
 
+get_top_list = (list, num) => {
+ let freq_list = {}
+ list.forEach((item) => {
+   if (freq_list.hasOwnProperty(item)) {
+     freq_list[item] = freq_list[item] + 1;
+   } else {
+     freq_list[item] = 1;
+   }
+ })
+
+ let sorted = [];
+ for (let item in freq_list) {
+   sorted.push([item, freq_list[item]]);
+ }
+ sorted.sort( (a, b) => {
+   return b[1] - a[1];
+ });
+
+ let retval = []
+ for (let i=0; i<num; i++){
+   retval.push(sorted[i][0])
+ }
+ return retval;
+}
+
 exports.get_all_tags = (gif_url_list, resolve, reject) => {
 
   let Promises = []
-
   JSON.parse(gif_url_list).forEach((gif_url) => {
     Promises.push(new Promise((resolve, reject) => {
       get_tags(gif_url, resolve, reject)
@@ -33,13 +57,14 @@ exports.get_all_tags = (gif_url_list, resolve, reject) => {
   });
 
   Promise.all(Promises).then((results) => {
-    let all_tags = new Set();
+    let all_tags = [];
     results.forEach((result) => {
       result.forEach((tag) => {
-        all_tags.add(tag);
+        all_tags.push(tag);
       })
     })
-    resolve(all_tags);
+
+    resolve(get_top_list(all_tags, 20));
   });
 
 }

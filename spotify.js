@@ -7,15 +7,39 @@ var spotifyApi = new SpotifyWebApi({
 
 spotifyApi.clientCredentialsGrant()
   .then(function(data) {
-    // Save the access token so that it's used in future calls
     spotifyApi.setAccessToken(data.body['access_token']);
   }, function(err) {
         console.log('Something went wrong when retrieving an access token', err);
   });
 
+get_top_list = (list, num) => {
+  let freq_list = {}
+  list.forEach((item) => {
+    if (freq_list.hasOwnProperty(item)) {
+      freq_list[item] = freq_list[item] + 1;
+    } else {
+      freq_list[item] = 1;
+    }
+  })
+
+  let sorted = [];
+  for (let item in freq_list) {
+    sorted.push([item, freq_list[item]]);
+  }
+  sorted.sort( (a, b) => {
+    return b[1] - a[1];
+  });
+
+  let retval = []
+  for (let i=0; i<num; i++){
+    retval.push(sorted[i][0])
+  }
+  return retval;
+}
+
 exports.search = (queries, resolve, reject) => {
   let Promises = []
-  queries.forEach((query) => {
+  queries.forEach( (query) => {
     Promises.push(new Promise((query_resolve, query_reject) => {
       spotifyApi.searchTracks(query)
       .then(function(data) {
@@ -31,14 +55,35 @@ exports.search = (queries, resolve, reject) => {
   })
 
   Promise.all(Promises).then(function(results){
-    let all_tracks = new Set();
+    let all_tracks = [];
     results.forEach((result) => {
       result.forEach((track) => {
-        all_tracks.add(track);
+        all_tracks.push(track);
       })
     })
-    resolve(all_tracks);
+    resolve(get_top_list(all_tracks, 25));
   });
+  /*
+  // Single, combined query version
+  console.log(queries)
+
+  let query = queries[0][0]
+  for(let i=1; i<queries.length; i++){
+    query = query + "%20" + queries[i][0];
+  }
+  console.log(query)
+
+  spotifyApi.searchTracks(query)
+  .then(function(data) {
+    let tracks = []
+    data.body.tracks.items.forEach((entry) => {
+      tracks.push(entry.id)
+    });
+    resolve(tracks);
+  }, function(err) {
+    console.error(err);
+  });
+  */
 }
 
 exports.createPlaylist = (songIds) => {

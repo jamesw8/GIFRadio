@@ -10,6 +10,7 @@ router.post('/', (req, res) => {
   new Promise((resolve, reject) => {
     clarifai.get_all_tags(req.body.gif_urls, resolve, reject)
   }).then((all_tags) => {
+    console.log(all_tags);
     new Promise((resolve, reject) => {
       spotify.search(all_tags, resolve, reject);
     }).then((tracks) => {
@@ -17,7 +18,6 @@ router.post('/', (req, res) => {
       spotify.createPlaylist(tracks);
     });
   });
-  spotify.createPlaylist
   res.json({status: 200});
 });
 
