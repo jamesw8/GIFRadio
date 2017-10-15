@@ -7,6 +7,9 @@
 		html {
 		    font-family: "Helvetica";
 		}
+		body {
+			margin: 0;
+		}
 		table {
 			width: 100%;
 			margin-bottom: 2em;
@@ -15,14 +18,14 @@
 			width: 100%;
 		}
 		td {
-			width: 25%;
-			border: 3px solid black;
+			width: 20%;
 		}
 		button {
 			background-color: #4caf50;
 			font-size: 2em;
 			border: none;
-			border-radius: 1em;
+			border-radius: 8em;
+			margin-bottom: 1em;
 			padding: 0.2em 0.75em 0.2em 0.75em;
 
 		}
@@ -33,41 +36,65 @@
 		    margin-top: 3em;
 		    text-align: center;
 		}
+		.top {
+			display: flex;
+			justify-content: center;
+		}
 		.info {
 			text-align: center;
 			font-size: 3.5em;
+			padding-right: 0.5em;
 			margin: 0 0 0.5em 0 !important;
 		}
 		.row {
 			height: 100px;
 		}
+		.select {
+			border: 5px solid red;
+		}
+		.not-select {
+			border: 5px solid black;
+		}
 	</style>
 </head>
 <body>
 	<div class="container">
-		<h1 class="info">Click up to 5 gifs</h1>
+		<div class="top">
+			<h1 class="info" id="hehe">Click up to 5 gifs</h1>
+			<button>Compose</button>
+		</div>
 		<table>
 		<tr>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
+			<td class="not-select" id="cell0"><img src="test.png"></td>
+			<td class="not-select" id="cell1"><img src="test.png"></td>
+			<td class="not-select" id="cell2"><img src="test.png"></td>
+			<td class="not-select" id="cell3"><img src="test.png"></td>
+			<td class="not-select" id="cell4"><img src="test.png"></td>
 		</tr>
 		<tr>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
+			<td class="not-select" id="cell5"><img src="test.png"></td>
+			<td class="not-select" id="cell6"><img src="test.png"></td>
+			<td class="not-select" id="cell7"><img src="test.png"></td>
+			<td class="not-select" id="cell8"><img src="test.png"></td>
+			<td class="not-select" id="cell9"><img src="test.png"></td>
 		</tr>
 		<tr>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
-			<td><img src="test.png"></td>
+			<td class="not-select" id="cell10"><img src="test.png"></td>
+			<td class="not-select" id="cell11"><img src="test.png"></td>
+			<td class="not-select" id="cell12"><img src="test.png"></td>
+			<td class="not-select" id="cell13"><img src="test.png"></td>
+			<td class="not-select" id="cell14"><img src="test.png"></td>
+		</tr>
+		<tr>
+			<td class="not-select" id="cell15"><img src="test.png"></td>
+			<td class="not-select" id="cell16"><img src="test.png"></td>
+			<td class="not-select" id="cell17"><img src="test.png"></td>
+			<td class="not-select" id="cell18"><img src="test.png"></td>
+			<td class="not-select" id="cell19"><img src="test.png"></td>
 		</tr>
 		</table>
-
-		<button>Compose</button>
 	</div>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
