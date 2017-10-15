@@ -42,7 +42,7 @@ get_top_list = (list, num) => {
 
  let retval = []
  for (let i=0; i<num; i++){
-   retval.push(sorted[i][0])
+   retval.push(sorted[i])
  }
  return retval;
 }

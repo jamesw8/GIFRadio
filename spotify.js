@@ -30,6 +30,8 @@ get_top_list = (list, num) => {
     return b[1] - a[1];
   });
 
+  console.log(sorted)
+
   let retval = []
   for (let i=0; i<num; i++){
     retval.push(sorted[i][0])
@@ -37,9 +39,9 @@ get_top_list = (list, num) => {
   return retval;
 }
 
-exports.search = (queries, resolve, reject) => {
+exports.search = (queries, frequencies, resolve, reject) => {
   let Promises = []
-  queries.forEach( (query) => {
+  queries.forEach( (query, index) => {
     Promises.push(new Promise((query_resolve, query_reject) => {
       spotifyApi.searchTracks(query)
       .then(function(data) {
@@ -51,7 +53,7 @@ exports.search = (queries, resolve, reject) => {
       }, function(err) {
         console.error(err);
       });
-    }))
+    }));
   })
 
   Promise.all(Promises).then(function(results){
@@ -61,7 +63,7 @@ exports.search = (queries, resolve, reject) => {
         all_tracks.push(track);
       })
     })
-    resolve(get_top_list(all_tracks, 25));
+    resolve(get_top_list(all_tracks, 20));
   });
   /*
   // Single, combined query version

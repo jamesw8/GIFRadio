@@ -14,7 +14,13 @@ router.post('/', (req, res) => {
     console.log(all_tags);
     retval["keywords"] = all_tags;
     new Promise((resolve, reject) => {
-      spotify.search(all_tags, resolve, reject);
+      tags = []
+      frequencies = []
+      all_tags.forEach((entry) => {
+        tags.push(entry[0]);
+        frequencies.push(entry[1]);
+      })
+      spotify.search(tags, frequencies, resolve, reject);
     }).then((tracks) => {
       console.log(tracks);
       retval["tracks"] = tracks;
