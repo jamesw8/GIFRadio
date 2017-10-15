@@ -4,10 +4,14 @@ const clarifai = require('../clarifai')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  const clarifai_result = clarifai.get_tags('https://samples.clarifai.com/beer.mp4');
-  console.log(clarifai_result)
-  res.json({status: 200});
+router.post('/', (req, res) => {
+  new Promise((resolve, reject) => {
+    clarifai.get_tags('https://samples.clarifai.com/beer.mp4', resolve, reject)
+  }).then((tags)=>{
+    console.log(tags);
+    res.json({status: 200});
+  });
+
 });
 
 module.exports = router;
