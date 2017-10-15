@@ -3,7 +3,6 @@
 <head>
 	<title>GIF Radio</title>
 	<style>
-
 		html {
 		    font-family: "Helvetica";
 		}
@@ -13,6 +12,11 @@
 		table {
 			width: 100%;
 			margin-bottom: 2em;
+		}
+		th {
+			font-size: 1.25em;
+			border-bottom: 2px solid black;
+			padding-bottom: 0.5em;
 		}
 		tr {
 			width: 100%;
@@ -59,10 +63,16 @@
 			height: 100px;
 			margin-top: 4.5px;
 		}
+		.keyword {
+			padding-bottom: 1em;
+		}
+		.first-row-songs {
+			padding-top: 1em;
+		}
 	</style>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="content">
 		<div class="top">
 			<h1 class="info">Click up to 5 gifs</h1>
 			<button id="submit">Compose</button>

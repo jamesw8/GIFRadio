@@ -1,7 +1,7 @@
 require('isomorphic-fetch');
 fs = require('fs');
 
-let api_key = process.env.giphy_api_key || fs.readFileSync('giphy_key', 'utf8');
+let api_key = "eoQOZaUpboc8tau1qvKRzpYos1DxxlJ6";
 
 let retrieveGIF = function(api_key, resolve, reject) {
 	fetch('http://api.giphy.com/v1/gifs/random?api_key=' + api_key + '&rating=pg').then((response) => {
