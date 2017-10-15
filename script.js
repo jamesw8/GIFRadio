@@ -2,12 +2,20 @@ var count = 0;
 var selected = Array.apply(null, Array(203)).map(Boolean.prototype.valueOf,false);
 
 //api call
+/*$.getJSON("http://localhost:8000/gifs", function(data) {
+    var json = $.parseJSON(data);
+  }
+);*/
+
+
 $.ajax({
   url: "http://localhost:8000/gifs",
   dataType: "text",
   success: function(data) {
     var json = $.parseJSON(data);
-    console.log(json);
+    for (var i=0; i<20; i++) {
+      document.getElementById("cell"+i).innerHTML = "<img src=\""+json.gifs[i]+">"
+    }
   }
 });
 

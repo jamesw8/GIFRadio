@@ -1,7 +1,7 @@
 const Clarifai = require('clarifai');
 
 const app = new Clarifai.App({
-  apiKey: process.env.clarifai_api_key
+  apiKey: "b4a79c19a8ec4369a485cb12bbecf4f3"
 });
 
 const extract_tags = (frames) => {
