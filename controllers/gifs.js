@@ -7,7 +7,6 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	let gif_promises = [];
 	
-
 	for (let gif = 0; gif < 20; gif++) {
  		gif_promises.push(
  			new Promise((resolve, reject) => {
