@@ -1,4 +1,5 @@
 const Clarifai = require('clarifai');
+const watson = require('./watson');
 
 const app = new Clarifai.App({
   apiKey: "b4a79c19a8ec4369a485cb12bbecf4f3"
@@ -30,20 +31,43 @@ get_top_list = (list, num) => {
    } else {
      freq_list[item] = 1;
    }
- })
+ });
 
  let sorted = [];
  for (let item in freq_list) {
    sorted.push([item, freq_list[item]]);
- }
+ };
  sorted.sort( (a, b) => {
    return b[1] - a[1];
  });
 
- let retval = []
- for (let i=0; i<num; i++){
-   retval.push(sorted[i])
+ let top_tags = "";
+ let retval = [];
+ for (let i=0; i < num-2; i++){
+   retval.push(sorted[i]);
+   top_tags = top_tags + sorted[i][0] + " ";
  }
+
+ console.log(top_tags);
+
+ let emotions = {
+   sadness: 0,
+   joy: 0,
+   fear: 0,
+   disgust: 0,
+   anger: 0
+ }
+
+ new Promise((resolve, reject) => {
+ 	 watson.retrieveEmotions(top_tags, resolve, reject);
+ }).then((json) => {
+ 	 return (json);
+ }).then((jsonWords) => {
+   //console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nasdfdghggfdsfgh");
+ 	 //console.log(jsonWords['emotion']['targets']);
+ });
+
+
  return retval;
 }
 

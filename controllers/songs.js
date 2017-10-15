@@ -11,7 +11,6 @@ router.post('/', (req, res) => {
   new Promise((resolve, reject) => {
     clarifai.get_all_tags(req.body.gif_urls, resolve, reject)
   }).then((all_tags) => {
-    console.log(all_tags);
     retval["keywords"] = all_tags;
     new Promise((resolve, reject) => {
       tags = []
@@ -22,16 +21,11 @@ router.post('/', (req, res) => {
       })
       spotify.search(tags, frequencies, resolve, reject);
     }).then((tracks) => {
-      console.log(tracks);
       retval["tracks"] = tracks;
-      console.log(retval)
       res.json(retval);
       //spotify.createPlaylist(tracks);
     });
   });
-
-
 });
-
 
 module.exports = router;

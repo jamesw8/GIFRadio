@@ -30,7 +30,7 @@ get_top_list = (list, num) => {
     return b[1] - a[1];
   });
 
-  console.log(sorted)
+  //console.log(sorted)
 
   let retval = []
   for (let i=0; i<num; i++){
@@ -95,10 +95,8 @@ exports.createPlaylist = (songIds) => {
   })
   spotifyApi.createPlaylist('12151562864', 'My Generated Playlist', { 'public' : false })
   .then(function(data) {
-    console.log(data);
+    //console.log(data);
   }, function(err) {
     console.log('Something went wrong!', err);
   });
 }
-
-exports
