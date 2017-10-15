@@ -6,30 +6,20 @@ const spotify = require('../spotify')
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  /*
-  let all_tags = new Set();
-  JSON.parse(req.body.gif_urls).forEach((gif_url) => {
+
+  new Promise((resolve, reject) => {
+    clarifai.get_all_tags(req.body.gif_urls, resolve, reject)
+  }).then((all_tags) => {
     new Promise((resolve, reject) => {
-      console.log(gif_url);
-      clarifai.get_tags(gif_url, resolve, reject)
-    }).then((tags)=>{
-      console.log(gif_url,tags,tags.length);
-	    tags.forEach((tag) => {
-        all_tags.add(tag);
-      });
-      console.log("all_tags",all_tags, all_tags.length);
+      spotify.search(all_tags, resolve, reject);
+    }).then((tracks) => {
+      console.log(tracks);
+      spotify.createPlaylist(tracks);
     });
   });
-  */
-  /*
-  new Promise((resolve, reject) => {
-    spotify.search("Save Me", resolve, reject);
-  }).then((returned) => {
-    console.log(returned);
-  })
-  */
-  //spotify.search("Save Me", resolve, reject);
+  spotify.createPlaylist
   res.json({status: 200});
 });
+
 
 module.exports = router;
