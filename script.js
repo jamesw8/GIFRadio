@@ -14,7 +14,7 @@ $.ajax({
   success: function(data) {
     var json = $.parseJSON(data);
     for (var i=0; i<20; i++) {
-      document.getElementById("cell"+i).innerHTML = "<img src=\""+json.gifs[i]+">"
+      document.getElementById("cell"+i).innerHTML = "<img class=\"giph\" src=\""+json.gifs[i]+">";
     }
   }
 });
