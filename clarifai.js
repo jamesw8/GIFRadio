@@ -48,7 +48,6 @@ get_top_list = (list, num) => {
    top_tags = top_tags + sorted[i][0] + " ";
  }
 
- console.log(top_tags);
 
  let emotions = {
    sadness: 0,
@@ -74,7 +73,7 @@ get_top_list = (list, num) => {
 exports.get_all_tags = (gif_url_list, resolve, reject) => {
 
   let Promises = []
-  JSON.parse(gif_url_list).forEach((gif_url) => {
+  gif_url_list.forEach((gif_url) => {
     Promises.push(new Promise((resolve, reject) => {
       get_tags(gif_url, resolve, reject)
     }))

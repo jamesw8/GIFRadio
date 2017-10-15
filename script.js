@@ -42,13 +42,10 @@ $("#submit").click(function() {
   for (var i=0; i<gifs.length; i++) {
     if (selected[i]) {
       toSubmit.push(gifs[i]);
-
     }
   }
-  console.log(toSubmit);
   $.post("http://localhost:8000/songs", {"gif_urls": toSubmit}, function(data, success) {
     var songs = data.tracks;
-
     var newPage1 = `<h1 class="info">Most Popular Tags</h1>
     <table><tr>`;
 
@@ -59,7 +56,7 @@ $("#submit").click(function() {
         newPage2 += "</tr><tr>";
       }
     }
-    
+
     var newPage3 = `</tr></table>
     <h1 class="info">Recommended Songs</h1>
     <div class="container">
