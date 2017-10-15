@@ -5,8 +5,6 @@ const giphy = require('../giphy');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	let gifs = [];
-	// let getGIF;
 	let gif_promises = [];
 	
 
