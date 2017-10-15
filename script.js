@@ -1,12 +1,6 @@
 var count = 0;
-var selected = Array.apply(null, Array(203)).map(Boolean.prototype.valueOf,false);
-
-//api call
-/*$.getJSON("http://localhost:8000/gifs", function(data) {
-    var json = $.parseJSON(data);
-  }
-);*/
-
+var selected = Array(20).fill(false);
+var gifs = Array(20).fill("");
 
 $.ajax({
   url: "http://localhost:8000/gifs",
@@ -14,7 +8,9 @@ $.ajax({
   success: function(data) {
     var json = $.parseJSON(data);
     for (var i=0; i<20; i++) {
-      document.getElementById("cell"+i).innerHTML = "<img class=\"giph\" src=\""+json.gifs[i]+">";
+      document.getElementById("cell"+i).innerHTML = "<img class=\"giph\" src=\""+json.gifs[i]+"\">";
+      console.log("<img class=\"giph\" src=\""+json.gifs[i]+">",document.getElementById("cell"+i).innerHTML);
+      gifs[i] = json.gifs[i];
     }
   }
 });
@@ -42,3 +38,7 @@ var clickFcn = function(i) {
 for (var i=0; i<20; i++) {
   clickFcn(i);
 }
+
+$("submit").click(function() {
+
+});

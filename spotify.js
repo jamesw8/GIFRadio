@@ -1,8 +1,8 @@
 var Spotify = require('node-spotify-api');
 
 var spotify = new Spotify({
-  id: process.env.spotify_client_id,
-  secret: process.env.spotify_client_secret,
+  id: "7af40ed9e4b64b88a9455c936ca70009",
+  secret: "06552a11a90c4b96b927bd694d0bbd8d",
 });
 
 exports.search = (query, resolve, reject) => {

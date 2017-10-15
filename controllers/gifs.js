@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 	}
 
 	Promise.all(gif_promises).then(gif_promises => {
+		console.log(gif_promises);
 		res.json({ gifs: gif_promises });
 	});
 });
