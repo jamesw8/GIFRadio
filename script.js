@@ -9,7 +9,6 @@ $.ajax({
     var json = $.parseJSON(data);
     for (var i=0; i<20; i++) {
       document.getElementById("cell"+i).innerHTML = "<img class=\"giph\" src=\""+json.gifs[i]+"\">";
-      console.log("<img class=\"giph\" src=\""+json.gifs[i]+">",document.getElementById("cell"+i).innerHTML);
       gifs[i] = json.gifs[i];
     }
   }
@@ -19,7 +18,6 @@ $.ajax({
 var clickFcn = function(i) {
   var name = "#cell"+i;
   $(name).click(function() {
-    console.log(count);
     if (selected[i]) {
       $(name).removeClass('select');
       $(name).addClass('not-select');
@@ -39,6 +37,15 @@ for (var i=0; i<20; i++) {
   clickFcn(i);
 }
 
-$("submit").click(function() {
 
+$("#submit").click(function() {
+  var toSubmit = [];
+  for (var i=0; i<gifs.length; i++) {
+    if (selected[i]) {
+      toSubmit.push(gifs[i]);
+
+    }
+  }
+  console.log(toSubmit);
+  $.post("http://localhost:8000/songs", {"gif_urls": toSubmit});
 });
