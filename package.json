@@ -1,0 +1,28 @@
+{
+  "name": "gifradio",
+  "version": "1.0.0",
+  "description": "An application to create a playlist of songs from a set of gifs using image recognition and sentiment analysis.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pooneetthaper/gifradio.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -L app.js",
+    "test": "jest"
+  },
+  "author": "Pooneet Thaper, Eric Kolbusz, James Wong",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "clarifai": "^2.4.0",
+    "express": "^4.16.1",
+    "nodemon": "^1.12.1",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.13.15"
+  }
+}
