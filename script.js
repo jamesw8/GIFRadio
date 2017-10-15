@@ -1,13 +1,16 @@
 var count = 0;
-var selected = Array.apply(null, Array(203)).map(Boolean.prototype.valueOf,false);
+var selected = Array(20).fill(false);
+var gifs = Array(20).fill("");
 
-//api call
 $.ajax({
   url: "http://localhost:8000/gifs",
   dataType: "text",
   success: function(data) {
     var json = $.parseJSON(data);
-    console.log(json);
+    for (var i=0; i<20; i++) {
+      document.getElementById("cell"+i).innerHTML = "<img class=\"giph\" src=\""+json.gifs[i]+"\">";
+      gifs[i] = json.gifs[i];
+    }
   }
 });
 
@@ -15,7 +18,6 @@ $.ajax({
 var clickFcn = function(i) {
   var name = "#cell"+i;
   $(name).click(function() {
-    console.log(count);
     if (selected[i]) {
       $(name).removeClass('select');
       $(name).addClass('not-select');
@@ -34,3 +36,16 @@ var clickFcn = function(i) {
 for (var i=0; i<20; i++) {
   clickFcn(i);
 }
+
+
+$("#submit").click(function() {
+  var toSubmit = [];
+  for (var i=0; i<gifs.length; i++) {
+    if (selected[i]) {
+      toSubmit.push(gifs[i]);
+
+    }
+  }
+  console.log(toSubmit);
+  $.post("http://localhost:8000/songs", {"gif_urls": toSubmit});
+});
