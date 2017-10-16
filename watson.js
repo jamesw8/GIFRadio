@@ -4,8 +4,8 @@ const NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-l
 let account_cred = JSON.parse(fs.readFileSync('watson_key', 'utf8'));
 
 const NaturalLanguageUnderstandingService = new NaturalLanguageUnderstandingV1({
-	"username": account_cred.username,
-	"password": account_cred.password,
+	"username": account_cred.username || process.env.watson_username,
+	"password": account_cred.password || process.env.watson_password,
 	"version_date": "2017-02-27"
 });
 
