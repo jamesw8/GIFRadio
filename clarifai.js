@@ -2,7 +2,7 @@ const Clarifai = require('clarifai');
 const watson = require('./watson');
 
 const app = new Clarifai.App({
-  apiKey: "b4a79c19a8ec4369a485cb12bbecf4f3"
+  apiKey: process.env.clarifai_api_key
 });
 
 const extract_tags = (frames) => {
